@@ -1,0 +1,31 @@
+name: Automated Testing Workflow
+
+on:
+  push:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.13'
+
+      - name: Run Test Case 1
+        run: |
+          python3 find_lowest_number.py test_data/test1_input.txt temp_output.txt
+          diff temp_output.txt test_data/test1_expected.txt
+
+      - name: Run Test Case 2
+        run: |
+          python3 find_lowest_number.py test_data/test2_input.txt temp_output.txt
+          diff temp_output.txt test_data/test2_expected.txt
+
+      - name: Run Test Case 3
+        run: |
+          python3 find_lowest_number.py test_data/test3_input.txt temp_output.txt
+          diff temp_output.txt test_data/test3_expected.txt
